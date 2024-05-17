@@ -12,7 +12,8 @@
 
 // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
 
-
+// Ask this question what data should each variable be storing after reviewing how they are used in each function below
+// Ex. What data is noteForm to store? Do we need to use this variable again as it can be redefined since it's a let
 let noteForm;
 let noteTitle;
 let noteText;
@@ -31,7 +32,8 @@ if (window.location.pathname === '/notes') {
 }
 
 // Establish the packages that will be used here: express middleware? fs function that will be used to send and return notes to the db.json file
-
+const express = require('express');
+const app = express()
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
