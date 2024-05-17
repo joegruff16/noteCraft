@@ -30,6 +30,8 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
+// Establish the packages that will be used here: express middleware? fs function that will be used to send and return notes to the db.json file
+
 // Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
