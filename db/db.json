@@ -1,7 +1,1 @@
-[
-    {
-        "title": "Test Title",
-        "text": "Test text",
-        "note": "Does this work?"
-    }
-]
+"[\n    {\n        \"title\": \"Test Title\",\n        \"text\": \"Test text\"\n    }\n]"

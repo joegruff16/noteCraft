@@ -32,12 +32,16 @@ app.get('/api/notes', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error(err);
+            res.status(500).json({ error: 'Failed to read notes' });
             return;
         }
-
+        console.log(data);
         // To take out of a json file is you would need to parse the data that was read out of the json file
-        const savedNotes = JSON.parse(data);
-        // Return saved notes as JSON
+        let savedNotes = [];
+
+        if (data) {
+            savedNotes = JSON.parse(data);
+        }
 
         // Now it needs to be sent back to the browser with res.json()
         res.json(savedNotes);
@@ -61,10 +65,16 @@ app.post('/api/notes', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) throw err
         console.log(data)
-        data.push(newNote);
-        fs.writeFile(filePath, JSON.stringify(data), (err, data))
+        // After the file is read the data needs to be updated into the db.json file. Include a variable to store JSON data to be include in writeFile method
+        const jsonData = JSON.stringify(data);
+        fs.writeFile(filePath, jsonData, (err) => {
+            if (err) {
+                console.error('Error writing file', err);
+                return;
+            }
+            console.log('Note has been successfully written to file')
+        });
     });
-
     res.json(newNote);
 
 
