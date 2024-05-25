@@ -53,21 +53,28 @@ app.get('/api/notes', (req, res) => {
 // POST Route
 app.post('/api/notes', (req, res) => {
     // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
-    // What extra steps do I need to take with the GET route above to include into the POST
     // Step 1 POST/api/notes receives a new note to save on the request body
-    const newNote = req.body;
+    console.info(`${req.method} request received to add new note`);
+    const { text, title } = req.body;
 
-    // Give each note a unique id
-    newNote.id = uuidv4();
-    console.log(newNote);
+    const newNote = {
+        text,
+        title,
+        id: uuidv4() // Give each note a unique id
+    };
+
     // Step 2 Add the new note to the db.json file and return the new note to the client
     // fs.readFileSync
     fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) throw err
-        console.log(data)
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        const notes = JSON.parse(data);
+        notes.push(newNote);
         // After the file is read the data needs to be updated into the db.json file. Include a variable to store JSON data to be include in writeFile method
-        const jsonData = JSON.stringify(data);
-        fs.writeFile(filePath, jsonData, (err) => {
+        fs.writeFile(filePath, JSON.stringify(notes, null, 2), (err) => {
             if (err) {
                 console.error('Error writing file', err);
                 return;
