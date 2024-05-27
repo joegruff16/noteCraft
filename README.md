@@ -21,7 +21,7 @@ Finally, I was able to use the DELETE/api/notes/:id to receive a query parameter
 ## Finished Product
 ![noteCraft-main-page](./public/assets/images/finished-product2.png)
 ![noteCraft](./public/assets/images/finished-product.png)
-![Render](./public/assets/images/render.png)
+![Render](./public/assets/images/Render.png)
 
 ## License
 
