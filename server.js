@@ -63,8 +63,7 @@ app.post('/api/notes', (req, res) => {
         id: uuidv4() // Give each note a unique id
     };
 
-    // Step 2 Add the new note to the db.json file and return the new note to the client
-    // fs.readFileSync
+    // Step 2 Read the db.json file and parse the data to JSON
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.log(err);
@@ -73,7 +72,7 @@ app.post('/api/notes', (req, res) => {
 
         const notes = JSON.parse(data);
         notes.push(newNote);
-        // After the file is read the data needs to be updated into the db.json file. Include a variable to store JSON data to be include in writeFile method
+        // After the file is read and updated into the db.json file, we are using the fs writeFile method to write the new note into the db.json file
         fs.writeFile(filePath, JSON.stringify(notes, null, 2), (err) => {
             if (err) {
                 console.error('Error writing file', err);
@@ -83,9 +82,22 @@ app.post('/api/notes', (req, res) => {
         });
     });
     res.json(newNote);
-
-
 })
+
+// Delete note
+app.delete('/api/notes/:id', (req, res) => {
+    // Step 1: Get the note ID from the req parameters
+    const noteId = req.params.id;
+    // Step 2: Read all the notes in the db.json file to gather the list of notes
+    const notes = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    // Step 3: Find the note with the matching ID using filter method
+    const findNotes = notes.filter(note => note.id !== noteId);
+    // Step 4: Now we need to save the updated list of notes back to the db.json file
+    fs.writeFileSync(filePath, JSON.stringify(findNotes));
+
+    res.json({ message: 'Successfully deleted note' });
+});
+
 app.get("*", (req, res) => {
     // GET * should return the index.html file.
     console.log(`Here is the main page that is running`);
