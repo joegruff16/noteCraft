@@ -19,6 +19,9 @@ Finally, I was able to use the DELETE/api/notes/:id to receive a query parameter
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 
 ## Finished Product
+![noteCraft-main-page](./public/assets/images/finished-product2.png)
+![noteCraft](./public/assets/images/finished-product.png)
+![Render](./public/assets/images/render.png)
 
 ## License
 
@@ -29,7 +32,9 @@ Finally, I was able to use the DELETE/api/notes/:id to receive a query parameter
 - Used this website to for adding usage badges
     - **<https://ileriayo.github.io/markdown-badges/>**
 
-## Live Link
+## Render Live Link
+
+<https://notecraft-app.onrender.com/>
 
 ## GitHub Repo
 
